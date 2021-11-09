@@ -25,16 +25,18 @@ server.get('Start', consentTracking.consent, cache.applyDefaultCache, function (
     var Site = require('dw/system/Site');
     var PageMgr = require('dw/experience/PageMgr');
     var pageMetaHelper = require('*/cartridge/scripts/helpers/pageMetaHelper');
+    var userLoggedIn = require('*/cartridge/scripts/middleware/userLoggedIn');
 
     pageMetaHelper.setPageMetaTags(req.pageMetaData, Site.current);
 
     var page = PageMgr.getPage('homepage');
-
-    if (page && page.isVisible()) {
-        res.page('homepage');
-    } else {
-        res.render('home/homePage');
-    }
+    if (userLoggedIn) { page.isVisible() = false}
+        if (page && page.isVisible()) {
+            res.page('homepage');
+        } else {
+            // res.render('home/homePage');
+        }
+    
     next();
 }, pageMetaData.computedPageMetaData);
 

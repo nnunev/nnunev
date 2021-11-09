@@ -10,7 +10,7 @@ var consentTracking = require('*/cartridge/scripts/middleware/consentTracking');
 var pageMetaData = require('*/cartridge/scripts/middleware/pageMetaData');
 
 /**
- * Any customization on this endpoint,______________________ also requires update for Default-Start endpoint
+ * Any customization on this endpoint, also requires update for Default-Start endpoint
  */
 /**
  * Home-Show : This endpoint is called when a shopper navigates to the home page
@@ -27,15 +27,16 @@ server.get('Show', consentTracking.consent, cache.applyDefaultCache, function (r
     var Site = require('dw/system/Site');
     var PageMgr = require('dw/experience/PageMgr');
     var pageMetaHelper = require('*/cartridge/scripts/helpers/pageMetaHelper');
-    // var logInHomePage = require('Login');
+    var userLoggedIn = require('*/cartridge/scripts/middleware/userLoggedIn');
     pageMetaHelper.setPageMetaTags(req.pageMetaData, Site.current);
 
     var page = PageMgr.getPage('homepage');
-
-    if (page && page.isVisible()) {     
-        res.page('homepage');
-    } else {
-        res.render('home/homePage');
+    if (userLoggedIn) {
+        if (page && page.isVisible()) {
+            res.page('homepage');
+        } else {
+            res.render('home/homePage');
+        }
     }
     next();
 }, pageMetaData.computedPageMetaData);
