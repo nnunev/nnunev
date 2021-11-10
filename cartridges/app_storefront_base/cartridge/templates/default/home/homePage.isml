@@ -1,5 +1,5 @@
 <isdecorate template="common/layout/page">
-<div class="container login-page">
+<iscomment> <div class="container login-page">
     <div class="row justify-content-center equal-height">
         <div class="col-sm-8 col-md-6">
             <div class="card">
@@ -22,7 +22,7 @@
         </div>
         
     </div> 
-</div> 
+</div>  </iscomment>
 
     <isscript>
         var assets = require('*/cartridge/scripts/assets.js');

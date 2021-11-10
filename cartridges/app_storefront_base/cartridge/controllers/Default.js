@@ -8,6 +8,7 @@ var server = require('server');
 var cache = require('*/cartridge/scripts/middleware/cache');
 var consentTracking = require('*/cartridge/scripts/middleware/consentTracking');
 var pageMetaData = require('*/cartridge/scripts/middleware/pageMetaData');
+var userLoggedIn = require('*/cartridge/scripts/middleware/userLoggedIn');
 
 /** when sitepath is defined in the site aliases from business manager, homepage will be rendered directly */
 /**
@@ -21,24 +22,32 @@ var pageMetaData = require('*/cartridge/scripts/middleware/pageMetaData');
  * @param {renders} - isml
  * @param {serverfunction} - get
  */
-server.get('Start', consentTracking.consent, cache.applyDefaultCache, function (req, res, next) {
-    var Site = require('dw/system/Site');
-    var PageMgr = require('dw/experience/PageMgr');
-    var pageMetaHelper = require('*/cartridge/scripts/helpers/pageMetaHelper');
-    var userLoggedIn = require('*/cartridge/scripts/middleware/userLoggedIn');
+server.get('Start', 
+    consentTracking.consent, 
+    cache.applyDefaultCache, 
+    server.middleware.https,
+    userLoggedIn.validateLoggedIn,
 
-    pageMetaHelper.setPageMetaTags(req.pageMetaData, Site.current);
+    function (req, res, next) {
+       
+        var URLUtils = require('dw/web/URLUtils');
+        var Site = require('dw/system/Site');
+        var PageMgr = require('dw/experience/PageMgr');
+        var pageMetaHelper = require('*/cartridge/scripts/helpers/pageMetaHelper');
+        
+        pageMetaHelper.setPageMetaTags(req.pageMetaData, Site.current);
 
-    var page = PageMgr.getPage('homepage');
-    if (userLoggedIn) { page.isVisible() = false}
-        if (page && page.isVisible()) {
+        var page = PageMgr.getPage('homepage');
+        var loggedIn = userLoggedIn.validateLoggedIn;
+
+        if (page && page.isVisible() && loggedIn) {
             res.page('homepage');
         } else {
             // res.render('home/homePage');
+            res.redirect(URLUtils.url('Login-Show'));
         }
-    
-    next();
-}, pageMetaData.computedPageMetaData);
+        next();
+    }, pageMetaData.computedPageMetaData);
 
 /** Renders the maintenance page when a site has been set to "Maintenance mode" */
 server.get('Offline', cache.applyDefaultCache, function (req, res, next) {
