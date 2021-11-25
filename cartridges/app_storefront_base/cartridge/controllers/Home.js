@@ -32,7 +32,7 @@ server.get('Show', consentTracking.consent, cache.applyDefaultCache, function (r
 
     var page = PageMgr.getPage('homepage');
 
-    if (page && page.isVisible()) {     
+    if (page && page.isVisible()) {
         res.page('homepage');
     } else {
         res.render('home/homePage');
