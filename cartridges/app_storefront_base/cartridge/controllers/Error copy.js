@@ -5,11 +5,12 @@
  */
 
 var server = require('server');
+var system = require('dw/system/System');
 var Resource = require('dw/web/Resource');
 var consentTracking = require('*/cartridge/scripts/middleware/consentTracking');
-
+// ErrorText == 'Secure connection required for this request.' && !CurrentRequest.httpSecure && (CurrentRequest.httpHeaders.containsKey("x-is-request_method")) && (CurrentRequest.httpHeaders["x-is-request_method"] == 'GET')
 /**
- * Error-Start : This endpoint is called when there is a server error. if the connection is http it redirects to https
+ * Error-Start : This endpoint is called when there is a server error
  * @name Base/Error-Start
  * @function
  * @memberof Error
@@ -21,15 +22,17 @@ var consentTracking = require('*/cartridge/scripts/middleware/consentTracking');
  */
 server.use('Start', consentTracking.consent, function (req, res, next) {
     res.setStatusCode(500);
-    var CurrentRequest = req;
-    if (!CurrentRequest.httpSecure && CurrentRequest.httpHeaders.containsKey("x-is-request_method") && CurrentRequest.httpHeaders["x-is-request_method"] == 'GET') {
-
-        var QueryString = CurrentRequest.httpQueryString ? ('?' + CurrentRequest.httpQueryString) : ''
-        var Location = 'https://' + (CurrentRequest.httpHost || '') + (CurrentRequest.httpPath || '') +QueryString
-        res.redirect(Location);
+    var showError = system.getInstanceType() !== system.PRODUCTION_SYSTEM
+        && system.getInstanceType() !== system.STAGING_SYSTEM;
+    if (req.httpHeaders.get('x-requested-with') === 'XMLHttpRequest') {
+        res.json({
+            error: showError ? req.error || {} : {},
+            message: Resource.msg('subheading.error.general', 'error', null)
+        });
     } else {
         res.render('error', {
             error: req.error || {},
+            showError: showError,
             message: Resource.msg('subheading.error.general', 'error', null)
         });
     }
@@ -67,8 +70,6 @@ server.use('ErrorCode', consentTracking.consent, function (req, res, next) {
  * @param {category} - non-sensitive
  * @param {serverfunction} - get
  */
-
-
 server.get('Forbidden', consentTracking.consent, function (req, res, next) {
     var URLUtils = require('dw/web/URLUtils');
     var CustomerMgr = require('dw/customer/CustomerMgr');
@@ -79,3 +80,7 @@ server.get('Forbidden', consentTracking.consent, function (req, res, next) {
 });
 
 module.exports = server.exports();
+/**  let secureError = req.httpSecure
+ if (secureError) {
+
+ } */

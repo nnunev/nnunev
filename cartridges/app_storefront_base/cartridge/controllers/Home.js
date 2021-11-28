@@ -27,7 +27,7 @@ server.get('Show', consentTracking.consent, cache.applyDefaultCache, function (r
     var Site = require('dw/system/Site');
     var PageMgr = require('dw/experience/PageMgr');
     var pageMetaHelper = require('*/cartridge/scripts/helpers/pageMetaHelper');
-    // var logInHomePage = require('Login');
+
     pageMetaHelper.setPageMetaTags(req.pageMetaData, Site.current);
 
     var page = PageMgr.getPage('homepage');

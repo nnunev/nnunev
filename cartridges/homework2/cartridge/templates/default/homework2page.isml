@@ -1,0 +1,6 @@
+<isscript>
+    let custumerAllData = customer.profile.firstName
+</isscript>
+
+
+<h1>hello ${custumerAllData}</h1>
