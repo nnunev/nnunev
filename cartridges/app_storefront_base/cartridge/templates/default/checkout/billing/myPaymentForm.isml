@@ -1,4 +1,4 @@
-<isset name="creditFields" value="${pdict.forms.billingForm.creditCardFields + '1'}" scope="page"/>
+<isset name="creditFields" value="${pdict.forms.billingForm.creditCardFields}" scope="page"/>
 
 <!--- Hidden input for credit card type --->
 <input type="hidden" class="form-control" id="cardType"

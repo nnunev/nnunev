@@ -18,7 +18,9 @@
 			missing-error="error.message.required"
 			range-error="error.message.50orless" 
 			type="string" />
+<!-- //country of residence
 
+		Interests -->
 		<field
 			formid="email" 
 			label="label.input.email.profile" 
