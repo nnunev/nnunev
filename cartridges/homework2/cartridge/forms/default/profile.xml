@@ -45,7 +45,7 @@
 			type="string"/> 
 			<!-- TODO value-error not comming back from the platform -->
 		
-		<!-- <field formid="residence" label="label.input.residence.profile" mandatory="true" missing-error="error.message.required" binding="countryCode" type="string">
+		<field formid="residence" label="label.input.residence.profile" mandatory="true" missing-error="error.message.required" binding="residence" type="string">
 			<options>
 				<option optionid="US" label="select.option.residence.unitedstates" value="US"/>
 				<option optionid="CA" label="select.option.residence.canada" value="CA"/>
@@ -62,8 +62,9 @@
 			mandatory="true" 
 			max-length="100" 
 			missing-error="error.message.required"
-			range-error="error.message.100orless" 
-			type="string" /> -->
+			range-error="error.message.100orless"
+			binding="interests" 
+			type="string" />
 
 		<field 
 			formid="phone"

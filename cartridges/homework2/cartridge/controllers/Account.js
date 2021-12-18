@@ -342,9 +342,13 @@ server.get(
     userLoggedIn.validateLoggedIn,
     consentTracking.consent,
     function (req, res, next) {
+        //var CustomerMgr = require('dw/customer/CustomerMgr');
         var Resource = require('dw/web/Resource');
         var URLUtils = require('dw/web/URLUtils');
         var accountHelpers = require('*/cartridge/scripts/account/accountHelpers');
+        // var customer = CustomerMgr.getCustomerByCustomerNumber(
+        //     req.currentCustomer.profile.customerNo
+        // );
 
         var accountModel = accountHelpers.getAccountModel(req);
         var profileForm = server.forms.getForm('profile');
@@ -353,8 +357,8 @@ server.get(
         profileForm.customer.lastname.value = accountModel.profile.lastName;
         profileForm.customer.phone.value = accountModel.profile.phone;
         profileForm.customer.email.value = accountModel.profile.email;
-        // profileForm.customer.interests.value = customer.profile.custom.interests;
-        // profileForm.customer.residence.value = ustomer.profile.custom.residence;
+        profileForm.customer.interests.value = accountModel.profile.custom.Interests;
+        profileForm.customer.residence.value = accountModel.profile.custom.residence;
         res.render('account/profile', {
             profileForm: profileForm,
             breadcrumbs: [
