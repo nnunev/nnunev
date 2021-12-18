@@ -25,6 +25,14 @@
             "script": "./cartridge/scripts/hooks/payment/processor/basic_credit_form_processor"
         },
         {
+            "name": "app.payment.processor.my_payment",
+            "script": "./cartridge/scripts/hooks/payment/processor/my_payment"
+        },
+        {
+            "name": "app.payment.form.processor.my_payment",
+            "script": "./cartridge/scripts/hooks/payment/processor/my_payment_form_processor"
+        },
+        {
             "name": "app.payment.form.processor.default_form_processor",
             "script": "./cartridge/scripts/hooks/payment/processor/default_form_processor"
         },

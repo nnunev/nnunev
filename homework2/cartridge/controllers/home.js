@@ -34,7 +34,7 @@ server.append('Show', function (req, res, next) {
             );
         }
 
-        viewData.customer.myData = [{
+        viewData.customer.profile.middleName = [{
             text: 'Lorem ',
             friend1: 'Nick'
         }, {

@@ -3,11 +3,22 @@
         var assets = require('*/cartridge/scripts/assets.js');
         assets.addJs('/js/productTile.js');
         assets.addCss('/css/homePage.css');
+        var custumerAllData = customer.profile.firstName
     </isscript>
 
     <div class="home-main homepage">
         <isslot id="home-main-m" description="Main home page slot." context="global" />
     </div>
+
+
+
+<h1>hello ${custumerAllData}</h1>
+    <div class="container">
+        my slot:
+        <isprint value="${custumerAllData}"  />
+        <isslot id="NickSlot" description="NickSlot" context="global" />
+    </div>
+
 
     <div class="container home-categories homepage">
         <div class="row home-main-categories no-gutters">

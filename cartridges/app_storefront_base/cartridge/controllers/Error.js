@@ -22,7 +22,7 @@ var consentTracking = require('*/cartridge/scripts/middleware/consentTracking');
 server.use('Start', consentTracking.consent, function (req, res, next) {
     res.setStatusCode(500);
     var CurrentRequest = req;
-    if (!CurrentRequest.httpSecure && CurrentRequest.httpHeaders.containsKey("x-is-request_method") && CurrentRequest.httpHeaders["x-is-request_method"] == 'GET') {
+    if (!CurrentRequest.httpSecure && CurrentRequest.httpHeaders.containsKey("x-is-request_method") && CurrentRequest.httpHeaders["x-is-request_method"] === 'GET') {
 
         var QueryString = CurrentRequest.httpQueryString ? ('?' + CurrentRequest.httpQueryString) : ''
         var Location = 'https://' + (CurrentRequest.httpHost || '') + (CurrentRequest.httpPath || '') +QueryString
