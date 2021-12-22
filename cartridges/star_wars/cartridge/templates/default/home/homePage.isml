@@ -11,29 +11,15 @@
     </div>
 
 
-
-    <h1>Slots homework</h1>
-
-    <div class="container">
-        
-        my slot:
-        <h1>hello ${custumerAllData}</h1>
-        <isprint value="${custumerAllData}"  />
-        <isslot id="NickSlot" description="NickSlot" context="global" />
-    </div>
-
-
+   
+    <isinclude url="${URLUtils.url('Star-Wars')}" />
+    
     <div class="container home-categories homepage">
         <div class="row home-main-categories no-gutters">
             <isslot id="home-categories-m" description="Categories slots on the home page." context="global" />
         </div>
     </div>
-    <div class="container homepage">
-        
-            <iscomment> <isslot id="home-categories-m" description="Categories slots on the home page." context="global" /> </iscomment>
-        
-    </div>
-    
+
     <div class="container home-product-tiles homepage">
         <div class="hp-product-grid" itemtype="http://schema.org/SomeProducts" itemid="#product">
             <isslot id="home-products-m" description="Product tiles on the home page." context="global" />

@@ -1,0 +1,5 @@
+<div class="container">
+    
+    <h2 class='text-center'>${pdict.catFact.fact} </h2> 
+    
+</div>

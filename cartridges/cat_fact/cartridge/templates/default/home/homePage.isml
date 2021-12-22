@@ -11,17 +11,8 @@
     </div>
 
 
-
-<iscomment> <h1>hello ${custumerAllData}</h1>
-    <div class="container">
-        my slot:
-        <isprint value="${custumerAllData}"  />
-        <isslot id="NickSlot" description="NickSlot" context="global" />
-    
-    </div> </iscomment>
-Here
-    <isinclude url="${URLUtils.url('Death-Star')}"/>
-    
+   
+    <isinclude url="${URLUtils.url('Cat-Fact')}" />
     
     <div class="container home-categories homepage">
         <div class="row home-main-categories no-gutters">
