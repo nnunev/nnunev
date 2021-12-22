@@ -8,9 +8,11 @@ var server = require('server');
 var cache = require('*/cartridge/scripts/middleware/cache');
 var consentTracking = require('*/cartridge/scripts/middleware/consentTracking');
 var pageMetaData = require('*/cartridge/scripts/middleware/pageMetaData');
+var userLoggedIn = require('*/cartridge/scripts/middleware/userLoggedIn');
+
 
 /**
- * Any customization on this endpoint,______________________ also requires update for Default-Start endpoint
+ * Any customization on this endpoint, also requires update for Default-Start endpoint
  */
 /**
  * Home-Show : This endpoint is called when a shopper navigates to the home page
@@ -23,7 +25,8 @@ var pageMetaData = require('*/cartridge/scripts/middleware/pageMetaData');
  * @param {renders} - isml
  * @param {serverfunction} - get
  */
-server.get('Show', consentTracking.consent, cache.applyDefaultCache, function (req, res, next) {
+server.get('Show', consentTracking.consent, cache.applyDefaultCache, userLoggedIn.validateLoggedIn, server.middleware.https, function (req, res, next) {
+    var URLUtils = require('dw/web/URLUtils');
     var Site = require('dw/system/Site');
     var PageMgr = require('dw/experience/PageMgr');
     var pageMetaHelper = require('*/cartridge/scripts/helpers/pageMetaHelper');
@@ -31,11 +34,15 @@ server.get('Show', consentTracking.consent, cache.applyDefaultCache, function (r
     pageMetaHelper.setPageMetaTags(req.pageMetaData, Site.current);
 
     var page = PageMgr.getPage('homepage');
+    var loggedIn = userLoggedIn.validateLoggedIn;
+
 
     if (page && page.isVisible()) {
+
         res.page('homepage');
     } else {
-        res.render('home/homePage');
+        // res.render('home/homePage');
+        res.redirect(URLUtils.url('Login-Show'));
     }
     next();
 }, pageMetaData.computedPageMetaData);
