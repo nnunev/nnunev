@@ -1,0 +1,11 @@
+<p>Hello ${pdict.welcomeMsg}</p>
+
+
+<isscript>
+    var items = ['one','two','three']
+</isscript>>
+
+<isloop>
+    <isloop items="${items}" item="subItem"
+    </<p></p>
+</isloop>

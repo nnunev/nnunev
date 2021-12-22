@@ -1,0 +1,5 @@
+<div class="container">
+    
+    <h2 class='text-center'>${pdict.starWars.name}, ${pdict.starWars.manufacturer}, ${pdict.starWars.starship_class} </h2> 
+    
+</div>

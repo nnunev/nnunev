@@ -36,7 +36,9 @@ server.get('Show', consentTracking.consent, cache.applyDefaultCache, userLoggedI
     var page = PageMgr.getPage('homepage');
     var loggedIn = userLoggedIn.validateLoggedIn;
 
-    if (page && page.isVisible() && loggedIn) {
+
+    if (page && page.isVisible()) {
+
         res.page('homepage');
     } else {
         // res.render('home/homePage');

@@ -353,6 +353,8 @@ server.get(
         profileForm.customer.lastname.value = accountModel.profile.lastName;
         profileForm.customer.phone.value = accountModel.profile.phone;
         profileForm.customer.email.value = accountModel.profile.email;
+        // profileForm.customer.interests.value = customer.profile.custom.interests;
+        // profileForm.customer.residence.value = ustomer.profile.custom.residence;
         res.render('account/profile', {
             profileForm: profileForm,
             breadcrumbs: [

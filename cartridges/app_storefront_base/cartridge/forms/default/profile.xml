@@ -44,7 +44,27 @@
 			value-error="ValueErrorText"
 			type="string"/> 
 			<!-- TODO value-error not comming back from the platform -->
-			
+		
+		<!-- <field formid="residence" label="label.input.residence.profile" mandatory="true" missing-error="error.message.required" binding="countryCode" type="string">
+			<options>
+				<option optionid="US" label="select.option.residence.unitedstates" value="US"/>
+				<option optionid="CA" label="select.option.residence.canada" value="CA"/>
+				<option optionid="DE" label="select.option.residence.Denmark" value="DE"/>
+				<option optionid="BG" label="select.option.residence.bulgaria" value="BG"/>
+				<option optionid="UK" label="select.option.residence.unitedkingdom" value="UK"/>
+			</options>
+		</field>
+
+		
+		<field 
+			formid="interests" 
+			label="label.input.interests.profile" 
+			mandatory="true" 
+			max-length="100" 
+			missing-error="error.message.required"
+			range-error="error.message.100orless" 
+			type="string" /> -->
+
 		<field 
 			formid="phone"
 			label="label.input.phone.profile"
